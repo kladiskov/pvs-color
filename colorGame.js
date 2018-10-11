@@ -63,7 +63,7 @@ function init() {
     }
     pickedColor = getRandomColor();
     colorDisplay.textContent = pickedColor;
-    h1.style.background = "#232323";
+    h1.style.background = "steelblue";
     messageDisplay.textContent = "";
     resetBtn.textContent = "New Color";
 }

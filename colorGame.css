@@ -1,5 +1,7 @@
 body {
     background: #232323;
+    margin: 0;
+    font-family: "Montserrat", "Avenir";
 }
 
 .square {
@@ -8,15 +10,29 @@ body {
     padding-bottom: 30%;
     float: left;
     margin: 1.66%;
+    /*Adding a border radious 50% will create circle*/
+    border-radius: 15%;
+    /*Hover effect to fade out the squares if selection is wrong*/
+    transition: background 0.8s;
+    /*browser specific transition for safari (webkit) and mozila (moz) as default behavour may not work in all browsers*/
+    -webkit-transition: background 0.8s;
+    -moz-transition: background 0.8s;
 }
 
 #container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 h1 {
     color: white;
+    text-align: center;
+    background: steelblue;
+    margin: 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 1.1;
+    padding: 20px 0;
 }
 
 #stripe {
@@ -27,5 +43,37 @@ h1 {
 }
 
 .selected {
-    background: blue;
+    color: white;
+    background: steelblue;
+}
+
+#colorDisplay {
+    font-size: 200%;
+}
+
+button {
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    height: 100%;
+    font-weight: 700;
+    color: steelblue;
+    letter-spacing: 1px;
+    font-size: inherit;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    /*Get rid of button outline. This is being added by the browser when clicked on a browser, hence this can be turned it off*/
+    outline: none;
+}
+/* hover effect to buttons*/
+button:hover {
+    color: white;
+    background: steelblue;
+}
+
+/*aligning the buttons and messages so that it wont move when messase appears.*/
+#message {
+    display: inline-block;
+    width: 20%;
 }
