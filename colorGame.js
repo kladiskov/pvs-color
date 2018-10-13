@@ -1,57 +1,65 @@
 
 var gridSize = 6;
-var colors = generateRandomColors(gridSize);
+var colors = [];
+var pickedColor;
+
 var squares = document.querySelectorAll(".square");
-
-var pickedColor = getRandomColor();
 var colorDisplay = document.getElementById("colorDisplay");
-colorDisplay.textContent = pickedColor;
-
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetBtn = document.querySelector("#newColor");
-var easyBtn = document.querySelector("#easyBtn");
-var hardBtn = document.querySelector("#hardBtn");
+var modeButtons = document.querySelectorAll(".mode");
 
-for (var i = 0; i < squares.length; i++) {
-    //adding initial colors
-    squares[i].style.backgroundColor = colors[i];
-
-    //adding event listeners
-    squares[i].addEventListener("click", function () {
-        var clickedColor = this.style.backgroundColor;
-        if (clickedColor === pickedColor) {
-            messageDisplay.textContent = "Correct choice.";
-            changeColors(pickedColor);
-            h1.style.backgroundColor = pickedColor;
-            resetBtn.textContent = "Play Again?";
-        } else {
-            this.style.backgroundColor = "#232323";
-            messageDisplay.textContent = "Try again.";
-        }
-    });
-}
-
-easyBtn.addEventListener("click", function () {
-    easyBtn.classList.add("selected");
-    hardBtn.classList.remove("selected");
-    gridSize = 3;
-    init();
-});
-
-hardBtn.addEventListener("click", function () {
-    hardBtn.classList.add("selected");
-    easyBtn.classList.remove("selected");
-    gridSize = 6;
-    init();
-});
-
-
-resetBtn.addEventListener("click", function () {
-    init();
-});
+init();
 
 function init() {
+    setupModeButtons();
+    setupSquares();
+    reset();
+}
+
+function setupSquares() {
+    for (var i = 0; i < squares.length; i++) {
+        //adding event listeners
+        squares[i].addEventListener("click", function () {
+            var clickedColor = this.style.backgroundColor;
+            if (clickedColor === pickedColor) {
+                messageDisplay.textContent = "Correct choice.";
+                changeColors(pickedColor);
+                h1.style.backgroundColor = pickedColor;
+                resetBtn.textContent = "Play Again?";
+            } else {
+                this.style.backgroundColor = "#232323";
+                messageDisplay.textContent = "Try again.";
+            }
+        });
+    }
+}
+
+function setupModeButtons() {
+    for (var i = 0; i < modeButtons.length; i++) {
+        modeButtons[i].addEventListener("click", function () {
+            modeButtons[0].classList.remove("selected");
+            modeButtons[1].classList.remove("selected");
+            this.classList.add("selected");
+
+            //this.textContent === "Easy" ? gridSize = 3 : gridSize = 6; - use of turnery op.
+            if (this.textContent === "Easy") {
+                gridSize = 3;
+            } else {
+                gridSize = 6;
+            }
+            reset();
+        });
+    }
+
+}
+
+resetBtn.addEventListener("click", function () {
+    reset();
+});
+
+function reset() {
     colors = generateRandomColors(gridSize);
     for (var i = 0; i < squares.length; i++) {
         if (colors[i]) {
